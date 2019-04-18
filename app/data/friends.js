@@ -11,7 +11,7 @@ var Friend = function(name, photo, scores) {
 function randomScoreArray(number) {
     var arr = [];
     for (var i = 0; i < number; i++) {
-        arr.push(Math.floor(Math.random()*11));
+        arr.push(Math.floor(Math.random()*6));
     }
     return arr;
 }
@@ -19,4 +19,7 @@ function randomScoreArray(number) {
 var sampleFriend = new Friend("Tane", "stockimage.jpg", randomScoreArray(questionAmount));
 
 friendsArray.push(sampleFriend);
-console.log(friendsArray);
+
+module.exports = {
+    friendsArray
+}
