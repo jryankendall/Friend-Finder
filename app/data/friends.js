@@ -11,7 +11,7 @@ var Friend = function(name, photo, scores) {
 function randomScoreArray(number) {
     var arr = [];
     for (var i = 0; i < number; i++) {
-        arr.push(Math.floor(Math.random()*6));
+        arr.push((Math.floor(Math.random()*5)) + 1);
     }
     return arr;
 }
