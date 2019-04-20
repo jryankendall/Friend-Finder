@@ -46,8 +46,13 @@ function addNewUser(friendObject) {
         })
 }
 
-function findMatches(friendObject) {
+function findMatches(friendObject, cb) {
+    fetchUsers();
+    cb(friendObject, pulledArray);
+}
 
+function listMatches(friendObj, arr) {
+    
 }
 
 function deleteUser(friendObject) {
