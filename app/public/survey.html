@@ -1,16 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Friend Finder Survey</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Friend Finder Survey</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>Survey Says!</h1>
+          <hr />
+        </div>
+      </div>
+      <div class="row survey-top">
+        <div class="col-12">
+          <h3>First, Some Background</h3>
+          <br />
+          <h4>Your Name (Required)</h4>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            required
+          />
+          <br />
+          <h4>Photo (Or just a stock picture really. Required.)</h4>
+          <input
+            type="text"
+            id="photo"
+            name="photo"
+            class="form-control"
+            required
+          />
+          <hr />
+          <button type="button" class="btn btn-primary" id="show-survey-btn">Show Survey</button>
+        </div>
+      </div>
+      <div class="row survey-body">
+      </div>
+      <div class="row survey-end">
+        <div class="col-12 d-flex justify-content-around">
+            <button type="button" class="btn btn-primary d-none" id="send-survey-btn">Submit Survey</button>
+        </div>
+      </div>
+    </div>
 
-</head>
-<body>
-
-    
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="logic.js"></script>
-</body>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="logic.js"></script>
+  </body>
+</html>

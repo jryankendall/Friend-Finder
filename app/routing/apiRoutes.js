@@ -15,6 +15,10 @@ module.exports = function(app) {
         res.json(friendsData.friendsArray);
     })
 
+    app.get("/api/questions", function(req, res) {
+        res.json(friendsData.questionArray);
+    })
+
     app.post("/api/friends", function(req, res) {
         friendsData.friendsArray.push(req.body);
         res.json(true);
