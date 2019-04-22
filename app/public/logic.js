@@ -24,6 +24,9 @@ $(document).ready(function() {
         var userTane = new Friend("Tane", null, null);
         deleteUser(userTane);
     })
+
+    console.log("Logic.js loaded.");
+    
 })
 
 var pulledArray = [];
