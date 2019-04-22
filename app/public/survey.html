@@ -13,6 +13,23 @@
     />
   </head>
   <body>
+
+    <div class="modal" role="dialog" id="surveyModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Match(es):</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body d-flex flex-column align-content-center" id="modal-display">
+
+            </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -27,7 +44,7 @@
           <h4>Your Name (Required)</h4>
           <input
             type="text"
-            id="name"
+            id="name-entry"
             name="name"
             class="form-control"
             required
@@ -36,7 +53,7 @@
           <h4>Photo (Or just a stock picture really. Required.)</h4>
           <input
             type="text"
-            id="photo"
+            id="photo-entry"
             name="photo"
             class="form-control"
             required
@@ -49,7 +66,8 @@
       </div>
       <div class="row survey-end">
         <div class="col-12 d-flex justify-content-around">
-            <button type="button" class="btn btn-primary d-none" id="send-survey-btn">Submit Survey</button>
+            <button type="button" class="btn btn-primary d-none" id="submit-survey" data-toggle="modal" data-target="#surveyModal">Submit Survey</button>
+            <a href="/" type="button" class="btn btn-primary d-none" id="return-button">Back to Homepage</a>
         </div>
       </div>
     </div>

@@ -2,10 +2,15 @@
 var friendsArray = [];
 var questionAmount = 10;
 
+function getSum(total, num) {
+    return parseInt(total) + parseInt(num);
+}
+
 var Friend = function(name, photo, scores) {
     this.name = name;
     this.photo = photo;
     this.scores = scores;
+    this.total = scores.reduce(getSum);
 }
 
 function randomScoreArray(number) {
@@ -16,7 +21,7 @@ function randomScoreArray(number) {
     return arr;
 }
 
-var sampleFriend = new Friend("Tane", "stockimage.jpg", randomScoreArray(questionAmount));
+var sampleFriend = new Friend("Tayne", "https://media.giphy.com/media/Oelzcbu0deOsg/giphy.gif", randomScoreArray(questionAmount));
 
 friendsArray.push(sampleFriend);
 

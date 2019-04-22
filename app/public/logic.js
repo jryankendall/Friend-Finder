@@ -1,7 +1,10 @@
+var questionAmount = 10;
+
 var Friend = function(name, photo, scores) {
     this.name = name;
     this.photo = photo;
     this.scores = scores;
+    this.total = scores.reduce(getSum);
 }
 
 $(document).ready(function() {
@@ -11,10 +14,21 @@ $(document).ready(function() {
         var photoUrl = $("#photo-entry").val().trim();
         var scoreArray = [];
         for (var i = 0; i < 10; i++) {
-            var answer = parseInt($("#survey-answer-" + i).val());
-            scoreArray.push(answer);
+            var answer = parseInt($("input[name=q" + i + "radio]:checked").val())
+            scoreArray.push(parseInt(answer));
         }
         var friendSubmission = new Friend(enteredName, photoUrl, scoreArray);
+        
+        hideSurvey();
+        $.get("/api/friends").then(function(data) {
+            pulledArray = [];
+            console.log(data);
+            
+            for (var i = 0; i < data.length; i++) {
+                pulledArray.push(data[i]);
+            }
+            totalUserScores(pulledArray, friendSubmission);
+        });
         addNewUser(friendSubmission);
         
     })
@@ -29,15 +43,15 @@ $(document).ready(function() {
         event.preventDefault();
         fetchQuestions(printData);
         $("#show-survey-btn").addClass("d-none");
-        $("#send-survey-btn").removeClass("d-none");
+        $("#submit-survey").removeClass("d-none");
     })
 
-    $("#send-survey-btn").on("click", function(event) {
+    $("#friends-empty").on("click", function(event) {
         event.preventDefault();
-        hideSurvey();
+        emptyFriends();
 
-        fetchUsers(pickUsers);
     })
+
 
     console.log("Logic.js loaded.");
     
@@ -45,10 +59,19 @@ $(document).ready(function() {
 
 var pulledArray = [];
 
+function getSum(total, num) {
+    return parseInt(total) + parseInt(num);
+}
+
+function returnFunc(vari) {
+    return vari;
+}
+
 function fetchUsers(cb) {
     $.get("/api/friends").then(function(data) {
         pulledArray = [];
         console.log(data);
+        
         for (var i = 0; i < data.length; i++) {
             pulledArray.push(data[i]);
         }
@@ -64,19 +87,41 @@ function addNewUser(friendObject) {
         })
 }
 
-function pickUsers(data) {
-
-}
 
 function hideSurvey() {
+    $(".survey-top").addClass("d-none");
+    $(".survey-body").addClass("d-none");
+    $("#submit-survey").addClass("d-none");
+    $("#return-button").removeClass("d-none");
 
 };
 
-function totalUserScores(data) {
-    var scoreArray = [];
+function totalUserScores(data, newUser) {
+    
+    var userScore = parseInt(newUser.total);
+    var closestUser = data[0];
     for (var i = 0; i < data.length; i++) {
-        
+        data[i].difference = Math.abs(userScore - parseInt(data[i].total));
     }
+    for (var j = 1; j < data.length; j++) {
+        if (data[j].difference < data[j-1].difference) {
+            if (data[j-1].name != data[j].name) {
+                closestUser = data[j];
+            }
+        }
+    }
+    return matchUser(closestUser);
+}
+
+function matchUser(object) {
+    var newHeader = $("<h2>");
+    newHeader.text(object.name);
+    var newImage = $("<img>");
+    newImage.css("width", "300");
+    newImage.css("height", "300");
+    newImage.attr("src", object.photo);
+    $("#modal-display").append(newHeader)
+                        .append(newImage);
 }
 
 function deleteUser(friendObject) {
@@ -126,3 +171,16 @@ function printData(data) {
         $(".survey-body").append(newHr);
     }
 }
+
+function emptyFriends() {
+    $.ajax({
+        type: "DELETE",
+        url: "api/friends/clear"
+    }).then(function(data) {
+        console.log(data);
+        
+        console.log("Friends array reset.");
+        
+    })
+}
+

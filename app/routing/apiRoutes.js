@@ -10,6 +10,17 @@ var findIndex = function(array, key, value) {
     }
 }
 
+var Friend = function(name, photo, scores) {
+    this.name = name;
+    this.photo = photo;
+    this.scores = scores;
+    this.total = scores.reduce(getSum);
+}
+
+function getSum(total, num) {
+    return parseInt(total) + parseInt(num);
+}
+
 module.exports = function(app) {
     app.get("/api/friends", function(req, res) {
         res.json(friendsData.friendsArray);
@@ -29,5 +40,21 @@ module.exports = function(app) {
         var existingFriend = friendsData.friendsArray[findIndex(friendsData.friendsArray, "name", friendName)];
         console.log(existingFriend);
         
+    })
+
+    app.delete("/api/friends/clear", function(req,res) {
+        var questionAmount = 10;
+        friendsData.friendsArray = [];
+        function randomScoreArray(number) {
+            var arr = [];
+            for (var i = 0; i < number; i++) {
+                arr.push((Math.floor(Math.random()*5)) + 1);
+            }
+            return arr;
+        }
+        
+        var sampleFriend = new Friend("Tayne", "https://media2.giphy.com/media/Oelzcbu0deOsg/giphy.gif", randomScoreArray(questionAmount));
+        
+        friendsData.friendsArray.push(sampleFriend);
     })
 }
