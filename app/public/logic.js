@@ -57,7 +57,7 @@ function listMatches(friendObj, arr) {
 
 function deleteUser(friendObject) {
     $.ajax({
-        method: "DELETE",
+        type: "DELETE",
         url: "/api/friends",
         data: friendObject
     }).then(function(dat) {
