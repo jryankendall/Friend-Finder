@@ -30,6 +30,7 @@ Inputting real personal information that could be traced back to you probably wo
 ## Known Issues/Bugs
 - Application can't really handle user skipping over questions or inputs very well.
 - Responsiveness may suffer on lower screen widths.
+- Most CSS/HTML is simple placeholder; it isn't pretty but it's functional.
   
 ## Contact
 
